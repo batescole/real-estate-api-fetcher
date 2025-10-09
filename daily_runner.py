@@ -195,25 +195,19 @@ def generate_property_listings(df):
             content.append(f"**Bedrooms/Bathrooms:** {beds}/{baths}")
         
         sqft = row.get('sqft', 0)
-        price_per_sqft = row.get('price_per_sqft', 0)
         if sqft > 0:
-            if price_per_sqft > 0:
-                content.append(f"**Square Feet:** {sqft:,} (${price_per_sqft:.2f}/sqft)")
-            else:
-                content.append(f"**Square Feet:** {sqft:,}")
+            content.append(f"**Square Feet:** {sqft:,}")
         
         property_type = row.get('property_type', '')
         if property_type:
             content.append(f"**Property Type:** {property_type}")
-        
-        days_on_zillow = row.get('days_on_zillow', 0)
-        if days_on_zillow > 0:
-            content.append(f"**Days on Zillow:** {days_on_zillow}")
+
+        content.append("")
         
         # Zillow URL on its own line
         property_url = row.get('property_url', '')
         if property_url:
-            content.append(f"[{property_url}]({property_url})")
+            content.append(f"**URL:** {property_url}")
         
         content.append("")
     

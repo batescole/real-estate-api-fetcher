@@ -44,10 +44,12 @@ Python tool to fetch real estate data by zip code using API
    - Create a config file (config.yaml) with defaults:
      ```yaml
      api_key: "your_api_key_here"
-     curl --request GET 
-	  --url 'https://zillow-com1.p.rapidapi.com/property3dtour?property_url=https%3A%2F%2Fwww.zillow.com%2Fhomedetails%2F1541-SW-102nd-Ter-Davie-FL-33324%2F43177112_zpid' 
-	  --header 'x-rapidapi-host: zillow-com1.p.rapidapi.com' 
-	  --header 'x-rapidapi-key: 1c1c20660cmshb9de78075042139p1d134cjsn83640c308aec'
+     conn = http.client.HTTPSConnection("zillow-com1.p.rapidapi.com")
+
+		headers = {
+    	'x-rapidapi-key': "1c1c20660cmshb9de78075042139p1d134cjsn83640c308aec",
+    	'x-rapidapi-host': "zillow-com1.p.rapidapi.com"
+		}
      zip_codes: ["37415", "37341 to 37450"]
      min_price: 150000
      max_price: 300000

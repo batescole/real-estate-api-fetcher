@@ -192,18 +192,18 @@ def generate_property_listings(df):
         beds = row.get('beds', 0)
         baths = row.get('baths', 0)
         if beds > 0 or baths > 0:
-            content.append(f"**Bedrooms/Bathrooms:** {beds}/{baths}")
+            content.append(f"** | Bedrooms/Bathrooms:** {beds}/{baths}")
         
         sqft = row.get('sqft', 0)
         if sqft > 0:
-            content.append(f"**Square Feet:** {sqft:,}")
+            content.append(f"** | Square Feet:** {sqft:,}")
         
         """NOT GETTING PROPERTY TYPE"""
         property_type = row.get('property_type', '')
         if property_type:
-            content.append(f"**Property Type:** {property_type}")
+            content.append(f"** | Property Type:** {property_type}")
         else:
-            content.append("**Property Type:** Not available")
+            content.append("** | Property Type:** Not available")
 
         content.append("")
         

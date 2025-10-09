@@ -180,15 +180,12 @@ def generate_property_listings(df):
     content = ["## Property Listings", ""]
     
     for idx, row in df.iterrows():
-        # Property header
+        # Property header (address only)
         address = row.get('address', 'N/A')
-        city = row.get('city', 'N/A')
-        state = row.get('state', 'N/A')
-        price = row.get('price', 0)
-        
-        content.append(f"### {idx + 1}. {address}, {city}, {state}")
+        content.append(f"### {idx + 1}. {address}")
         
         # Property details
+        price = row.get('price', 0)
         if price > 0:
             content.append(f"**Price:** ${price:,}")
         
@@ -198,8 +195,12 @@ def generate_property_listings(df):
             content.append(f"**Bedrooms/Bathrooms:** {beds}/{baths}")
         
         sqft = row.get('sqft', 0)
+        price_per_sqft = row.get('price_per_sqft', 0)
         if sqft > 0:
-            content.append(f"**Square Feet:** {sqft:,}")
+            if price_per_sqft > 0:
+                content.append(f"**Square Feet:** {sqft:,} (${price_per_sqft:.2f}/sqft)")
+            else:
+                content.append(f"**Square Feet:** {sqft:,}")
         
         property_type = row.get('property_type', '')
         if property_type:
@@ -209,14 +210,10 @@ def generate_property_listings(df):
         if days_on_zillow > 0:
             content.append(f"**Days on Zillow:** {days_on_zillow}")
         
-        price_per_sqft = row.get('price_per_sqft', 0)
-        if price_per_sqft > 0:
-            content.append(f"**Price per Sq Ft:** ${price_per_sqft:.2f}")
-        
-        # Zillow URL
+        # Zillow URL on its own line
         property_url = row.get('property_url', '')
         if property_url:
-            content.append(f"**Zillow Link:** [{property_url}]({property_url})")
+            content.append(f"[{property_url}]({property_url})")
         
         content.append("")
     

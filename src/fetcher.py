@@ -145,9 +145,14 @@ def search_properties_by_zip_codes(client: ZillowRapidAPIClient,
                     if address and city and state and zpid:
                         property_url = f"https://www.zillow.com/homedetails/{address}-{city}-{state}/{zpid}_zpid"
                 
+                # Clean address to remove city, state, zip
+                raw_address = prop.get("address", "")
+                address_parts = raw_address.split(',')
+                clean_address = address_parts[0].strip() if address_parts else raw_address
+                
                 listing = {
                     "zpid": prop.get("zpid"),
-                    "address": prop.get("address", ""),
+                    "address": clean_address,
                     "city": prop.get("city", ""),
                     "state": prop.get("state", ""),
                     "zipcode": prop.get("zipcode", zip_code),
@@ -320,7 +325,7 @@ def main():
             print("\n=== PROPERTY SEARCH RESULTS ===")
             
             # Display key columns with URLs
-            display_columns = ['address', 'city', 'state', 'price', 'beds', 'baths', 'sqft', 'property_url']
+            display_columns = ['address', 'price', 'beds', 'baths', 'sqft', 'property_url']
             available_columns = [col for col in display_columns if col in df.columns]
             
             if available_columns:

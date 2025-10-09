@@ -211,7 +211,7 @@ def generate_property_listings(df):
         # NEED TO CONCAT ZILLOW.COM
         property_url = row.get('property_url', '')
         if property_url:
-            content.append(f"**URL:** zillow.com{property_url}")
+            content.append(f"**URL:** www.zillow.com{property_url}")
         
         content.append("")
     

@@ -1,0 +1,12 @@
+access_token: "your_bridge_api_access_token_here"
+server_name: "your_server_name"  # Bridge API server name (e.g., 'test' or your production server)
+
+# Search parameters
+zip_codes: ["37415", "37405", "37409"]  # Chattanooga, TN area
+min_price: 150000
+max_price: 300000
+min_beds: 2
+min_baths: 1
+propertyType: "Single Family"  # Bridge API uses PropertySubType
+sort_by: "newest"
+

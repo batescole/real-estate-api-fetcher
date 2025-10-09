@@ -198,16 +198,20 @@ def generate_property_listings(df):
         if sqft > 0:
             content.append(f"**Square Feet:** {sqft:,}")
         
+        """NOT GETTING PROPERTY TYPE"""
         property_type = row.get('property_type', '')
         if property_type:
             content.append(f"**Property Type:** {property_type}")
+        else:
+            content.append("**Property Type:** Not available")
 
         content.append("")
         
         # Zillow URL on its own line
+        # NEED TO CONCAT ZILLOW.COM
         property_url = row.get('property_url', '')
         if property_url:
-            content.append(f"**URL:** {property_url}")
+            content.append(f"**URL:** zillow.com{property_url}")
         
         content.append("")
     

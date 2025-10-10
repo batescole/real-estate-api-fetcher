@@ -253,7 +253,7 @@ def save_to_markdown(df: pd.DataFrame, config: Dict[str, Any]) -> str:
                 markdown_content.append(f"**Square Feet:** {sqft:,}")
             
             propertyType = row.get('propertyType', '')
-            if propertyType == "SINGLE_FAMILY":
+            if propertyType:
                 markdown_content.append(f"**Property Type:** {propertyType}")
         
             # Zillow URL
@@ -306,9 +306,20 @@ def main():
         
         if not df.empty:
             # Clean data and remove duplicates
-            from utils import clean_property_data
+            from utils import clean_property_data, filter_properties
             df = clean_property_data(df)
-            logger.info(f"Found {len(df)} properties")
+            logger.info(f"Found {len(df)} properties after cleaning")
+            
+            # Apply client-side filtering since API doesn't always respect filters
+            df = filter_properties(
+                df,
+                min_price=search_params.get("min_price"),
+                max_price=search_params.get("max_price"),
+                min_beds=search_params.get("min_beds"),
+                min_baths=search_params.get("min_baths"),
+                propertyType=search_params.get("propertyType")
+            )
+            logger.info(f"Found {len(df)} properties after filtering")
             print("\n=== PROPERTY SEARCH RESULTS ===")
             
             # Display key columns with URLs

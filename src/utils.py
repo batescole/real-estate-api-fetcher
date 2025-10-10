@@ -133,7 +133,8 @@ def filter_properties(df: pd.DataFrame,
                      max_beds: Optional[int] = None,
                      min_baths: Optional[int] = None,
                      min_sqft: Optional[int] = None,
-                     max_sqft: Optional[int] = None) -> pd.DataFrame:
+                     max_sqft: Optional[int] = None,
+                     propertyType: Optional[str] = None) -> pd.DataFrame:
     """Apply additional filters to property data"""
     if df.empty:
         return df
@@ -160,6 +161,15 @@ def filter_properties(df: pd.DataFrame,
     
     if max_sqft is not None:
         df = df[df['sqft'] <= max_sqft]
+    
+    if propertyType is not None:
+        # Filter by property type (case-insensitive comparison)
+        if 'propertyType' in df.columns:
+            pre_filter_count = len(df)
+            df = df[df['propertyType'].str.upper() == propertyType.upper()]
+            filtered_count = pre_filter_count - len(df)
+            if filtered_count > 0:
+                logger.info(f"Filtered out {filtered_count} properties not matching propertyType: {propertyType}")
     
     logger.info(f"Filtered data: {len(df)} properties remaining (from {original_count})")
     return df

@@ -9,7 +9,7 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
 from fetcher import ZillowRapidAPIClient, load_config, search_properties_by_zip_codes
-from utils import compare_property_lists, load_from_csv, save_to_csv, clean_property_data, validate_no_duplicates
+from utils import compare_property_lists, load_from_csv, save_to_csv, clean_property_data, validate_no_duplicates, filter_properties
 import logging
 from datetime import datetime, timedelta
 import json
@@ -256,12 +256,23 @@ def run_daily_fetch():
         
         # Clean data and remove duplicates
         new_df = clean_property_data(new_df)
+        logger.info(f"Found {len(new_df)} properties after cleaning")
+        
+        # Apply client-side filtering since API doesn't always respect filters
+        new_df = filter_properties(
+            new_df,
+            min_price=search_params.get("min_price"),
+            max_price=search_params.get("max_price"),
+            min_beds=search_params.get("min_beds"),
+            min_baths=search_params.get("min_baths"),
+            propertyType=search_params.get("propertyType")
+        )
         
         if new_df.empty:
-            logger.warning("No properties remaining after duplicate removal")
+            logger.warning("No properties remaining after filtering")
             return
         
-        logger.info(f"Found {len(new_df)} unique properties after cleaning")
+        logger.info(f"Found {len(new_df)} unique properties after filtering")
         
         # Validate no duplicates exist
         if not validate_no_duplicates(new_df):

@@ -1,12 +1,12 @@
 # Real Estate Property Report
-**Generated on:** 2025-10-09 22:58:23
+**Generated on:** 2025-10-09 23:01:25
 
 ## Search Criteria
 - **Zip Codes:** 37415, 37405, 37409
 - **Price Range:** $150,000 - $300,000
 - **Minimum Beds:** 2
 - **Minimum Baths:** 1
-- **Home Type:** SINGLE_FAMILY
+- **Home Type:** N/A
 - **Sort By:** newest
 
 ## Summary Statistics

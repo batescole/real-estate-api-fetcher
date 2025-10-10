@@ -1,22 +1,23 @@
 # Real Estate Property Report
-**Last Updated:** 2025-10-09 23:16:27
+**Generated on:** 2025-10-09 23:17:44
 
 ## Search Criteria
 - **Zip Codes:** 37415, 37405, 37409
 - **Price Range:** $150,000 - $300,000
 - **Minimum Beds:** 2
 - **Minimum Baths:** 1
-- **Property Type:** N/A
+- **Home Type:** N/A
 - **Sort By:** newest
 
 ## Summary Statistics
 - **Total Properties Found:** 46
 - **Average Price:** $234,491.30
 - **Price Range:** $150,000 - $300,000
-- **Average Bedrooms:** 2.3
-- **Average Bathrooms:** 2.0
-- **Average Square Feet:** 1,173
 
+## Recent Changes
+- **New Properties:** 0
+- **Removed Properties:** 0
+- **Price Changes:** 0
 
 ## Property Listings
 

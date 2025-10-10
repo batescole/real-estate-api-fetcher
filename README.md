@@ -2,6 +2,12 @@
 
 A Python application that fetches real estate property data from Zillow using RapidAPI and generates formatted reports.
 
+## Sample Output
+
+<kbd>
+   <img width="907" height="745" alt="Screenshot 2025-10-10 at 10 32 47 AM" src="https://github.com/user-attachments/assets/356dfcbe-7d33-473f-8bd4-2c2fb8f3d25f" />
+</kbd>
+   
 ## Features
 
 - **Property Search**: Search properties by zip code with customizable filters

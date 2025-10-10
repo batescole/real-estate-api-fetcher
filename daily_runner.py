@@ -125,7 +125,7 @@ def create_new_report(new_df, config, changes=None):
     markdown_content = []
     
     # Header
-    markdown_content.append("# Real Estate Property Report")
+    markdown_content.append("# REAL ESTATE PROPERTY REPORT")
     markdown_content.append(f"**Generated on:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     markdown_content.append("")
     
@@ -196,13 +196,13 @@ def generate_property_listings(df):
         # Build the single line with all details
         details = []
         if price > 0:
-            details.append(f"**Price:** ${price:,}")
+            details.append(f"**PRICE:** ${price:,}")
         if beds > 0 or baths > 0:
-            details.append(f"**Beds/Baths:** {beds}/{baths}")
+            details.append(f"**BEDS/BATHS:** {beds}/{baths}")
         if sqft > 0:
-            details.append(f"**Sqft:** {sqft:,}")
+            details.append(f"**SQFT:** {sqft:,}")
         if price_per_sqft > 0:
-            details.append(f"**Price/Sqft:** ${price_per_sqft:.2f}")
+            details.append(f"**$/SQFT:** ${price_per_sqft:.2f}")
         
         # Join with separator
         if details:

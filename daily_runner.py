@@ -184,33 +184,37 @@ def generate_property_listings(df):
         address = row.get('address', 'N/A')
         content.append(f"### {idx + 1}. {address}")
         
-        # Property details
+        # Property details on ONE line with Price/Sqft calculation
         price = row.get('price', 0)
-        if price > 0:
-            content.append(f"**Price:** ${price:,}")
-        
         beds = row.get('beds', 0)
         baths = row.get('baths', 0)
-        if beds > 0 or baths > 0:
-            content.append(f"**Bedrooms/Bathrooms:** {beds}/{baths}")
-        
         sqft = row.get('sqft', 0)
+        
+        # Calculate price per sqft
+        price_per_sqft = price / sqft if sqft > 0 else 0
+        
+        # Build the single line with all details
+        details = []
+        if price > 0:
+            details.append(f"**Price:** ${price:,}")
+        if beds > 0 or baths > 0:
+            details.append(f"**Beds/Baths:** {beds}/{baths}")
         if sqft > 0:
-            content.append(f"**Square Feet:** {sqft:,}")
+            details.append(f"**Sqft:** {sqft:,}")
+        if price_per_sqft > 0:
+            details.append(f"**Price/Sqft:** ${price_per_sqft:.2f}")
         
-        propertyType = row.get('propertyType', None)
-        if propertyType:
-            content.append(f"**Property Type:** {propertyType}")
-        else:
-            content.append("**Property Type:** Not available")
-
-        content.append("")
+        # Join with separator
+        if details:
+            content.append(" | ".join(details))
         
-        # Zillow URL on its own line
-        # NEED TO CONCAT ZILLOW.COM
+        # Zillow URL on separate line
         property_url = row.get('property_url', '')
         if property_url:
-            content.append(f"**URL:** www.zillow.com{property_url}")
+            # Clean up URL if needed
+            if not property_url.startswith('http'):
+                property_url = f"www.zillow.com{property_url}" if property_url.startswith('/') else property_url
+            content.append(f"**URL:** {property_url}")
         
         content.append("")
     

@@ -1,0 +1,12 @@
+api_key: "your_rapidapi_key_here"
+host: "zillow-com1.p.rapidapi.com"
+
+# Search parameters
+zip_codes: ["37415", "37405", "37409"]  # Chattanooga, TN area
+min_price: 150000
+max_price: 300000
+min_beds: 2
+min_baths: 1
+propertyType: "SINGLE_FAMILY"
+sort_by: "newest"
+

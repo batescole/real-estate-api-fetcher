@@ -119,7 +119,6 @@ def search_properties_by_zip_codes(client: ZillowRapidAPIClient,
     for zip_code in zip_codes:
         logger.info(f"Searching properties in zip code: {zip_code}")
         
-        #DOES NOTHING I THINK
         try:
             response = client.search_properties(
                 location=zip_code,

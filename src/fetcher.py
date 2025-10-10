@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 class ZillowRapidAPIClient:
     """Client for RapidAPI Zillow API endpoints"""
     
-    def __init__(self, api_key: str, host: str = "zillow-com1.p.rapidapi.com"):
+    def __init__(self, api_key: str, host: str = "zillow-com1.p.rapidapi.com/propertyExtendedSearch"):
         self.api_key = api_key
         self.host = host
         self.base_url = f"https://{host}"
@@ -41,7 +41,7 @@ class ZillowRapidAPIClient:
                          min_beds: Optional[int] = None,
                          max_beds: Optional[int] = None,
                          min_baths: Optional[int] = None,
-                         property_type: Optional[str] = None,
+                         propertyType: Optional[str] = None,
                          sort_by: str = "newest",
                          limit: int = 20) -> Dict[str, Any]:
         """
@@ -54,7 +54,7 @@ class ZillowRapidAPIClient:
             min_beds: Minimum bedrooms
             max_beds: Maximum bedrooms
             min_baths: Minimum bathrooms
-            property_type: Type of property (house, condo, etc.)
+            propertyType: Type of property (house, condo, etc.)
             sort_by: Sort results by (newest, price_asc, price_desc)
             limit: Number of results to return
         """
@@ -74,8 +74,8 @@ class ZillowRapidAPIClient:
             params["bedsMax"] = max_beds
         if min_baths:
             params["bathsMin"] = min_baths
-        if property_type:
-            params["propertyType"] = property_type
+        if propertyType:
+            params["propertyType"] = propertyType
         
         return self._make_request("propertyExtendedSearch", params)
     
@@ -126,7 +126,7 @@ def search_properties_by_zip_codes(client: ZillowRapidAPIClient,
                 max_price=search_params.get("max_price"),
                 min_beds=search_params.get("min_beds"),
                 min_baths=search_params.get("min_baths"),
-                property_type=search_params.get("property_types", ["house"])[0] if search_params.get("property_types") else None,
+                propertyType=search_params.get("propertyType"),
                 sort_by=search_params.get("sort_by", "newest")
             )
             
@@ -160,11 +160,9 @@ def search_properties_by_zip_codes(client: ZillowRapidAPIClient,
                     "beds": prop.get("bedrooms", 0),
                     "baths": prop.get("bathrooms", 0),
                     "sqft": prop.get("livingArea", 0),
-                    "property_type": prop.get("homeType", ""),
+                    "propertyType": prop.get("propertyType", ""),
                     "listing_date": prop.get("datePosted", ""),
-                    "property_url": property_url,
-                    "days_on_zillow": prop.get("daysOnZillow", 0),
-                    "price_per_sqft": prop.get("pricePerSquareFoot", 0)
+                    "property_url": property_url
                 }
                 all_listings.append(listing)
                 
@@ -200,7 +198,7 @@ def save_to_markdown(df: pd.DataFrame, config: Dict[str, Any]) -> str:
     markdown_content.append(f"- **Price Range:** ${config.get('min_price', 'N/A'):,} - ${config.get('max_price', 'N/A'):,}")
     markdown_content.append(f"- **Minimum Beds:** {config.get('min_beds', 'N/A')}")
     markdown_content.append(f"- **Minimum Baths:** {config.get('min_baths', 'N/A')}")
-    markdown_content.append(f"- **Property Types:** {', '.join(config.get('property_types', []))}")
+    markdown_content.append(f"- **Property Types:** {', '.join(config.get('propertyType', []))}")
     markdown_content.append(f"- **Sort By:** {config.get('sort_by', 'N/A')}")
     markdown_content.append("")
     
@@ -257,9 +255,9 @@ def save_to_markdown(df: pd.DataFrame, config: Dict[str, Any]) -> str:
             if sqft > 0:
                 markdown_content.append(f"**Square Feet:** {sqft:,}")
             
-            property_type = row.get('property_type', '')
-            if property_type:
-                markdown_content.append(f"**Property Type:** {property_type}")
+            propertyType = row.get('propertyType', '')
+            if propertyType:
+                markdown_content.append(f"**Property Type:** {propertyType}")
             
             days_on_zillow = row.get('days_on_zillow', 0)
             if days_on_zillow > 0:
@@ -305,7 +303,7 @@ def main():
             "max_price": config.get("max_price"),
             "min_beds": config.get("min_beds"),
             "min_baths": config.get("min_baths"),
-            "property_types": config.get("property_types"),
+            "propertyTypes": config.get("propertyTypes"),
             "sort_by": config.get("sort_by")
         }
         logger.info(f"Search parameters: {search_params}")

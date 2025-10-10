@@ -135,7 +135,7 @@ def create_new_report(new_df, config, changes=None):
     markdown_content.append(f"- **Price Range:** ${config.get('min_price', 'N/A'):,} - ${config.get('max_price', 'N/A'):,}")
     markdown_content.append(f"- **Minimum Beds:** {config.get('min_beds', 'N/A')}")
     markdown_content.append(f"- **Minimum Baths:** {config.get('min_baths', 'N/A')}")
-    markdown_content.append(f"- **Property Types:** {', '.join(config.get('property_types', []))}")
+    markdown_content.append(f"- **Property Types:** {', '.join(config.get('propertyTypes', []))}")
     markdown_content.append(f"- **Sort By:** {config.get('sort_by', 'N/A')}")
     markdown_content.append("")
     
@@ -199,9 +199,9 @@ def generate_property_listings(df):
             content.append(f"**Square Feet:** {sqft:,}")
         
         """NOT GETTING PROPERTY TYPE"""
-        property_type = row.get('property_type', '')
-        if property_type:
-            content.append(f"**Property Type:** {property_type}")
+        propertyType = row.get('propertyType', '')
+        if propertyType:
+            content.append(f"**Property Type:** {propertyType}")
         else:
             content.append("**Property Type:** Not available")
 
@@ -238,7 +238,7 @@ def run_daily_fetch():
             "max_price": config.get("max_price"),
             "min_beds": config.get("min_beds"),
             "min_baths": config.get("min_baths"),
-            "property_types": config.get("property_types"),
+            "propertyType": config.get("propertyType"),
             "sort_by": config.get("sort_by")
         }
         

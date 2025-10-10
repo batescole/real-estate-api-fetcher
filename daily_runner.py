@@ -204,9 +204,9 @@ def generate_property_listings(df):
         if price_per_sqft > 0:
             details.append(f"**$/SQFT:** ${price_per_sqft:.2f}")
         
-        # Join with separator
+        # Join with EXTRA SPACING separator
         if details:
-            content.append(" | ".join(details))
+            content.append("  |  ".join(details))
         
         # Add newline before URL
         content.append("")

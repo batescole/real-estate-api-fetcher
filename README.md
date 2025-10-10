@@ -47,7 +47,7 @@ A Python application that fetches real estate property data from Zillow using Ra
 The application generates several output files in the `data/` directory:
 
 - **`properties_YYYYMMDD_HHMMSS.csv`** - Raw property data
-- **`properties_report_YYYYMMDD_HHMMSS.md`** - Formatted markdown report
+- **`daily_properties_report.md`** - Formatted markdown report
 - **`daily_runner.log`** - Execution logs
 - **`cron.log`** - Cron job logs (if using automation)
 

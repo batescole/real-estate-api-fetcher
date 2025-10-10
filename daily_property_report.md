@@ -1,5 +1,5 @@
 # Real Estate Property Report
-**Generated on:** 2025-10-09 23:01:25
+**Generated on:** 2025-10-09 23:02:47
 
 ## Search Criteria
 - **Zip Codes:** 37415, 37405, 37409
@@ -25,7 +25,7 @@
 **Price:** $150,000
 **Bedrooms/Bathrooms:** 2/1
 **Square Feet:** 962
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/4110-McCahill-Rd-Chattanooga-TN-37415/41399477_zpid/
 
@@ -33,7 +33,7 @@
 **Price:** $299,000
 **Bedrooms/Bathrooms:** 3/2
 **Square Feet:** 1,528
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/862-Intermont-Rd-Chattanooga-TN-37415/41408933_zpid/
 
@@ -41,7 +41,7 @@
 **Price:** $264,900
 **Bedrooms/Bathrooms:** 2/3
 **Square Feet:** 1,368
-**Property Type:** Not available
+**Property Type:** TOWNHOUSE
 
 **URL:** www.zillow.com/homedetails/4135-Mountain-Creek-Rd-Chattanooga-TN-37415/41396616_zpid/
 
@@ -49,7 +49,7 @@
 **Price:** $239,900
 **Bedrooms/Bathrooms:** 3/1
 **Square Feet:** 1,086
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/3531-Sleepy-Hollow-Rd-Chattanooga-TN-37415/41408713_zpid/
 
@@ -57,7 +57,7 @@
 **Price:** $224,500
 **Bedrooms/Bathrooms:** 2/1
 **Square Feet:** 862
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/2510-Nonova-Ln-Chattanooga-TN-37415/2064771631_zpid/
 
@@ -65,7 +65,7 @@
 **Price:** $189,500
 **Bedrooms/Bathrooms:** 2/3
 **Square Feet:** 1,420
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/800-Reads-Lake-Rd-APT-305-Chattanooga-TN-37415/41396627_zpid/
 
@@ -73,7 +73,7 @@
 **Price:** $189,900
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 924
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/3961-N-Quail-Ln-Chattanooga-TN-37415/41397332_zpid/
 
@@ -81,7 +81,7 @@
 **Price:** $255,900
 **Bedrooms/Bathrooms:** 2/1
 **Square Feet:** 1,092
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/3816-Azalean-Dr-Chattanooga-TN-37415/41408475_zpid/
 
@@ -89,7 +89,7 @@
 **Price:** $250,000
 **Bedrooms/Bathrooms:** 2/1
 **Square Feet:** 1,008
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/508-Lupton-Dr-Chattanooga-TN-37415/41408706_zpid/
 
@@ -97,7 +97,7 @@
 **Price:** $276,900
 **Bedrooms/Bathrooms:** 2/3
 **Square Feet:** 1,440
-**Property Type:** Not available
+**Property Type:** TOWNHOUSE
 
 **URL:** www.zillow.com/homedetails/4143-Mountain-Creek-Rd-Chattanooga-TN-37415/41396620_zpid/
 
@@ -105,7 +105,7 @@
 **Price:** $294,500
 **Bedrooms/Bathrooms:** 2/1
 **Square Feet:** 1,123
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/113-Hill-Rd-Chattanooga-TN-37415/41391556_zpid/
 
@@ -113,7 +113,7 @@
 **Price:** $300,000
 **Bedrooms/Bathrooms:** 4/4
 **Square Feet:** 2,048
-**Property Type:** Not available
+**Property Type:** MULTI_FAMILY
 
 **URL:** www.zillow.com/homedetails/2400-Briggs-Ave-Chattanooga-TN-37415/41406462_zpid/
 
@@ -121,7 +121,7 @@
 **Price:** $300,000
 **Bedrooms/Bathrooms:** 4/3
 **Square Feet:** 1,920
-**Property Type:** Not available
+**Property Type:** MULTI_FAMILY
 
 **URL:** www.zillow.com/homedetails/221-Clift-View-Dr-Chattanooga-TN-37415/41409192_zpid/
 
@@ -129,7 +129,7 @@
 **Price:** $254,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,508
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/127-P-Poole-Ave-Chattanooga-TN-37415/41406326_zpid/
 
@@ -137,7 +137,7 @@
 **Price:** $299,000
 **Bedrooms/Bathrooms:** 3/2
 **Square Feet:** 1,680
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/133-Hill-Rd-Chattanooga-TN-37415/41391546_zpid/
 
@@ -145,7 +145,7 @@
 **Price:** $262,500
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 893
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/3447-Van-Buren-St-Chattanooga-TN-37415/41408875_zpid/
 
@@ -153,7 +153,7 @@
 **Price:** $275,000
 **Bedrooms/Bathrooms:** 3/1
 **Square Feet:** 960
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/541-Lullwater-Rd-Chattanooga-TN-37405/41406601_zpid/
 
@@ -161,7 +161,7 @@
 **Price:** $295,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,175
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/1131-Stringers-Ridge-Rd-APT-10B-Chattanooga-TN-37405/450047012_zpid/
 
@@ -169,7 +169,7 @@
 **Price:** $184,500
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,080
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/900-Mountain-Creek-Rd-APT-V474-Chattanooga-TN-37405/443065651_zpid/
 
@@ -177,7 +177,7 @@
 **Price:** $157,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 950
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/900-Mountain-Creek-Rd-APT-I109-Chattanooga-TN-37405/2078807946_zpid/
 
@@ -185,7 +185,7 @@
 **Price:** $259,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,065
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/1414-Continental-Dr-APT-509-Chattanooga-TN-37405/41413792_zpid/
 
@@ -193,7 +193,7 @@
 **Price:** $285,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,435
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/1414-Continental-Dr-APT-606-Chattanooga-TN-37405/41413798_zpid/
 
@@ -201,7 +201,7 @@
 **Price:** $187,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 952
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/900-Mountain-Creek-Rd-APT-C50-Chattanooga-TN-37405/456793968_zpid/
 
@@ -209,7 +209,7 @@
 **Price:** $222,500
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,080
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/326-W-Midvale-Ave-APT-18-Chattanooga-TN-37405/41412282_zpid/
 
@@ -217,7 +217,7 @@
 **Price:** $275,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,175
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/1131-Stringers-Ridge-Rd-APT-4A-Chattanooga-TN-37405/120887552_zpid/
 
@@ -225,7 +225,7 @@
 **Price:** $170,000
 **Bedrooms/Bathrooms:** 2/1
 **Square Feet:** 885
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/832-McRoy-Dr-Chattanooga-TN-37405/41413367_zpid/
 
@@ -233,7 +233,7 @@
 **Price:** $275,000
 **Bedrooms/Bathrooms:** 3/1
 **Square Feet:** 1,032
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/719-Federal-St-Chattanooga-TN-37405/41414285_zpid/
 
@@ -241,7 +241,7 @@
 **Price:** $150,000
 **Bedrooms/Bathrooms:** 3/2
 **Square Feet:** 1,242
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/900-Mountain-Creek-Rd-APT-S376-Chattanooga-TN-37405/455977670_zpid/
 
@@ -249,7 +249,7 @@
 **Price:** $205,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,175
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/1131-Stringers-Ridge-Rd-APT-2A-Chattanooga-TN-37405/118385785_zpid/
 
@@ -257,7 +257,7 @@
 **Price:** $247,500
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,175
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/1131-Stringers-Ridge-Rd-APT-7C-Chattanooga-TN-37405/118381876_zpid/
 
@@ -265,7 +265,7 @@
 **Price:** $242,900
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 988
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/234-Hendricks-Blvd-Chattanooga-TN-37405/41406658_zpid/
 
@@ -273,7 +273,7 @@
 **Price:** $166,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,036
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/900-Mountain-Creek-Rd-APT-198-Chattanooga-TN-37405/41406953_zpid/
 
@@ -281,7 +281,7 @@
 **Price:** $295,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,174
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/1131-Stringers-Ridge-Rd-APT-9G-Chattanooga-TN-37405/83728449_zpid/
 
@@ -289,7 +289,7 @@
 **Price:** $169,900
 **Bedrooms/Bathrooms:** 3/2
 **Square Feet:** 1,242
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/900-Mountain-Creek-Rd-APT-R321-Chattanooga-TN-37405/439807302_zpid/
 
@@ -297,7 +297,7 @@
 **Price:** $175,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,036
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/900-Mountain-Creek-Rd-APT-P-236-Chattanooga-TN-37405/2074372732_zpid/
 
@@ -305,7 +305,7 @@
 **Price:** $240,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,175
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/1131-Stringers-Ridge-Rd-APT-4C-Chattanooga-TN-37405/120885630_zpid/
 
@@ -313,7 +313,7 @@
 **Price:** $159,900
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,036
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/900-Mountain-Creek-Rd-P234-Chattanooga-TN-37405/452929193_zpid/
 
@@ -321,7 +321,7 @@
 **Price:** $299,900
 **Bedrooms/Bathrooms:** 4/2
 **Square Feet:** 1,711
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/504-Gurley-St-Chattanooga-TN-37405/41419916_zpid/
 
@@ -329,7 +329,7 @@
 **Price:** $174,500
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 950
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/900-Mountain-Creek-Rd-Chattanooga-TN-37405/41407238_zpid/
 
@@ -337,7 +337,7 @@
 **Price:** $174,500
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 950
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/900-Mountain-Creek-Rd-APT-M162-Chattanooga-TN-37405/2064818758_zpid/
 
@@ -345,7 +345,7 @@
 **Price:** $159,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,080
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/900-Mountain-Creek-Rd-APT-O-203-Chattanooga-TN-37405/2064818236_zpid/
 
@@ -353,7 +353,7 @@
 **Price:** $262,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,065
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/1414-Continental-Dr-Chattanooga-TN-37405/349923674_zpid/
 
@@ -361,7 +361,7 @@
 **Price:** $262,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,065
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/1414-Continental-Dr-APT-302-Chattanooga-TN-37405/41413765_zpid/
 
@@ -369,7 +369,7 @@
 **Price:** $190,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 884
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/1021-W-Elmwood-Dr-Chattanooga-TN-37405/41413350_zpid/
 
@@ -377,7 +377,7 @@
 **Price:** $289,000
 **Bedrooms/Bathrooms:** 2/3
 **Square Feet:** 1,260
-**Property Type:** Not available
+**Property Type:** CONDO
 
 **URL:** www.zillow.com/homedetails/527-Winterview-Ln-Chattanooga-TN-37409/55240977_zpid/
 
@@ -385,6 +385,6 @@
 **Price:** $289,000
 **Bedrooms/Bathrooms:** 2/2
 **Square Feet:** 1,062
-**Property Type:** Not available
+**Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/1402-W-53rd-St-Chattanooga-TN-37409/55242029_zpid/

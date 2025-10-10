@@ -7,6 +7,6 @@ min_price: 150000
 max_price: 300000
 min_beds: 2
 min_baths: 1
-propertyType: ["SINGLE_FAMILY"]
+propertyType: "Houses"
 sort_by: "newest"
 

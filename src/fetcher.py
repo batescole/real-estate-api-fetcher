@@ -41,7 +41,7 @@ class ZillowRapidAPIClient:
                          min_beds: Optional[int] = None,
                          max_beds: Optional[int] = None,
                          min_baths: Optional[int] = None,
-                         propertyType: Optional[str] = None,
+                         propertyType: str = "SINGLE_FAMILY",
                          sort_by: str = "newest",
                          limit: int = 20) -> Dict[str, Any]:
         """
@@ -198,7 +198,7 @@ def save_to_markdown(df: pd.DataFrame, config: Dict[str, Any]) -> str:
     markdown_content.append(f"- **Price Range:** ${config.get('min_price', 'N/A'):,} - ${config.get('max_price', 'N/A'):,}")
     markdown_content.append(f"- **Minimum Beds:** {config.get('min_beds', 'N/A')}")
     markdown_content.append(f"- **Minimum Baths:** {config.get('min_baths', 'N/A')}")
-    markdown_content.append(f"- **Property Types:** {', '.join(config.get('propertyType', []))}")
+    markdown_content.append(f"- **Property Type:** {config.get('propertyType', 'N/A')}")
     markdown_content.append(f"- **Sort By:** {config.get('sort_by', 'N/A')}")
     markdown_content.append("")
     
@@ -258,15 +258,7 @@ def save_to_markdown(df: pd.DataFrame, config: Dict[str, Any]) -> str:
             propertyType = row.get('propertyType', '')
             if propertyType:
                 markdown_content.append(f"**Property Type:** {propertyType}")
-            
-            days_on_zillow = row.get('days_on_zillow', 0)
-            if days_on_zillow > 0:
-                markdown_content.append(f"**Days on Zillow:** {days_on_zillow}")
-            
-            price_per_sqft = row.get('price_per_sqft', 0)
-            if price_per_sqft > 0:
-                markdown_content.append(f"**Price per Sq Ft:** ${price_per_sqft:.2f}")
-            
+        
             # Zillow URL
             property_url = row.get('property_url', '')
             if property_url:
@@ -303,7 +295,7 @@ def main():
             "max_price": config.get("max_price"),
             "min_beds": config.get("min_beds"),
             "min_baths": config.get("min_baths"),
-            "propertyTypes": config.get("propertyTypes"),
+            "propertyType": config.get("propertyType"),
             "sort_by": config.get("sort_by")
         }
         logger.info(f"Search parameters: {search_params}")
@@ -323,7 +315,7 @@ def main():
             print("\n=== PROPERTY SEARCH RESULTS ===")
             
             # Display key columns with URLs
-            display_columns = ['address', 'price', 'beds', 'baths', 'sqft', 'property_url']
+            display_columns = ['address', 'price', 'beds', 'baths', 'sqft', 'property_url', 'propertyType']
             available_columns = [col for col in display_columns if col in df.columns]
             
             if available_columns:

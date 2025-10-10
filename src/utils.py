@@ -186,7 +186,7 @@ def get_property_statistics(df: pd.DataFrame) -> Dict[str, Any]:
         'average_sqft': df['sqft'].mean(),
         'price_per_sqft_avg': df['price_per_sqft'].mean(),
         'cities': df['city'].value_counts().head(10).to_dict(),
-        'property_types': df['property_type'].value_counts().to_dict()
+        'property_type': df['property_type'].value_counts().to_dict()
     }
     
     return stats

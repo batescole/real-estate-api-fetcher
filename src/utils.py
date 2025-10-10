@@ -16,16 +16,10 @@ def clean_property_data(df: pd.DataFrame) -> pd.DataFrame:
     df['price'] = pd.to_numeric(df['price'].astype(str).str.replace(r'[^\d.]', '', regex=True), errors='coerce')
     
     # Convert numeric fields
-    numeric_fields = ['beds', 'baths', 'sqft', 'lot_size', 'price_per_sqft', 'days_on_zillow']
+    numeric_fields = ['beds', 'baths', 'sqft']
     for field in numeric_fields:
         if field in df.columns:
             df[field] = pd.to_numeric(df[field], errors='coerce')
-    
-    # Convert coordinates to numeric
-    if 'latitude' in df.columns:
-        df['latitude'] = pd.to_numeric(df['latitude'], errors='coerce')
-    if 'longitude' in df.columns:
-        df['longitude'] = pd.to_numeric(df['longitude'], errors='coerce')
     
     # Clean address field
     df['address'] = df['address'].astype(str).str.strip()
@@ -186,7 +180,7 @@ def get_property_statistics(df: pd.DataFrame) -> Dict[str, Any]:
         'average_sqft': df['sqft'].mean(),
         'price_per_sqft_avg': df['price_per_sqft'].mean(),
         'cities': df['city'].value_counts().head(10).to_dict(),
-        'property_type': df['property_type'].value_counts().to_dict()
+        'propertyType': df['propertyType'].value_counts().to_dict()
     }
     
     return stats

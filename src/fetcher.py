@@ -41,8 +41,8 @@ class ZillowRapidAPIClient:
                          min_beds: Optional[int] = None,
                          max_beds: Optional[int] = None,
                          min_baths: Optional[int] = None,
-                         propertyType: str = "SINGLE_FAMILY",
-                         sort_by: str = "newest",
+                         propertyType: Optional[str] = None,
+                         sort_by: Optional[str] = None,
                          limit: int = 20) -> Dict[str, Any]:
         """
         Search for properties using RapidAPI Zillow endpoint
@@ -119,6 +119,7 @@ def search_properties_by_zip_codes(client: ZillowRapidAPIClient,
     for zip_code in zip_codes:
         logger.info(f"Searching properties in zip code: {zip_code}")
         
+        #DOES NOTHING I THINK
         try:
             response = client.search_properties(
                 location=zip_code,
@@ -153,15 +154,11 @@ def search_properties_by_zip_codes(client: ZillowRapidAPIClient,
                 listing = {
                     "zpid": prop.get("zpid"),
                     "address": clean_address,
-                    "city": prop.get("city", ""),
-                    "state": prop.get("state", ""),
-                    "zipcode": prop.get("zipcode", zip_code),
                     "price": prop.get("price", 0),
                     "beds": prop.get("bedrooms", 0),
                     "baths": prop.get("bathrooms", 0),
                     "sqft": prop.get("livingArea", 0),
-                    "propertyType": prop.get("propertyType", ""),
-                    "listing_date": prop.get("datePosted", ""),
+                    "propertyType": prop.get("propertyType", "N/A"),
                     "property_url": property_url
                 }
                 all_listings.append(listing)
@@ -256,7 +253,7 @@ def save_to_markdown(df: pd.DataFrame, config: Dict[str, Any]) -> str:
                 markdown_content.append(f"**Square Feet:** {sqft:,}")
             
             propertyType = row.get('propertyType', '')
-            if propertyType:
+            if propertyType == "SINGLE_FAMILY":
                 markdown_content.append(f"**Property Type:** {propertyType}")
         
             # Zillow URL

@@ -135,7 +135,7 @@ def create_new_report(new_df, config, changes=None):
     markdown_content.append(f"- **Price Range:** ${config.get('min_price', 'N/A'):,} - ${config.get('max_price', 'N/A'):,}")
     markdown_content.append(f"- **Minimum Beds:** {config.get('min_beds', 'N/A')}")
     markdown_content.append(f"- **Minimum Baths:** {config.get('min_baths', 'N/A')}")
-    markdown_content.append(f"- **Property Types:** {config.get('propertyType', 'N/A')}")
+    markdown_content.append(f"- **Property Type:** {config.get('propertyType', 'N/A')}")
     markdown_content.append(f"- **Sort By:** {config.get('sort_by', 'N/A')}")
     markdown_content.append("")
     
@@ -198,8 +198,7 @@ def generate_property_listings(df):
         if sqft > 0:
             content.append(f"**Square Feet:** {sqft:,}")
         
-        """NOT GETTING PROPERTY TYPE"""
-        propertyType = row.get('propertyType', '')
+        propertyType = row.get('propertyType', None)
         if propertyType:
             content.append(f"**Property Type:** {propertyType}")
         else:

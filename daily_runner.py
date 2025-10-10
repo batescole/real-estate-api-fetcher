@@ -130,7 +130,7 @@ def create_new_report(new_df, config, changes=None):
     markdown_content.append("")
     
     # Search criteria
-    markdown_content.append("## Search Criteria")
+    markdown_content.append("## SEARCH CRITERIA")
     markdown_content.append(f"- **Zip Codes:** {', '.join(config.get('zip_codes', []))}")
     markdown_content.append(f"- **Price Range:** ${config.get('min_price', 'N/A'):,} - ${config.get('max_price', 'N/A'):,}")
     markdown_content.append(f"- **Minimum Beds:** {config.get('min_beds', 'N/A')}")
@@ -141,7 +141,7 @@ def create_new_report(new_df, config, changes=None):
     
     # Summary statistics
     if not new_df.empty:
-        markdown_content.append("## Summary Statistics")
+        markdown_content.append("## SUMMARY STATISTICS")
         markdown_content.append(f"- **Total Properties Found:** {len(new_df)}")
         
         if 'price' in new_df.columns:
@@ -155,7 +155,7 @@ def create_new_report(new_df, config, changes=None):
     
     # Changes section if there are changes
     if changes:
-        markdown_content.append("## Recent Changes")
+        markdown_content.append("## RECENT CHANGES")
         markdown_content.append(f"- **New Properties:** {len(changes.get('new_properties', []))}")
         markdown_content.append(f"- **Removed Properties:** {len(changes.get('removed_properties', []))}")
         markdown_content.append(f"- **Price Changes:** {len(changes.get('price_changes', []))}")
@@ -175,9 +175,9 @@ def create_new_report(new_df, config, changes=None):
 def generate_property_listings(df):
     """Generate the property listings section of markdown"""
     if df.empty:
-        return "## No Properties Found\nNo properties were found matching your search criteria."
+        return "## NO PROPERTIES FOUND\nNo properties were found matching your search criteria."
     
-    content = ["## Property Listings", ""]
+    content = ["## PROPERTY LISTINGS", ""]
     
     for idx, row in df.iterrows():
         # Property header (address only)
@@ -207,6 +207,9 @@ def generate_property_listings(df):
         # Join with separator
         if details:
             content.append(" | ".join(details))
+        
+        # Add newline before URL
+        content.append("")
         
         # Zillow URL on separate line
         property_url = row.get('property_url', '')

@@ -1,5 +1,5 @@
 # Real Estate Property Report
-**Generated on:** 2025-10-09 21:01:04
+**Generated on:** 2025-10-09 21:02:08
 
 ## Search Criteria
 - **Zip Codes:** 37415, 37405, 37409
@@ -10,13 +10,13 @@
 - **Sort By:** newest
 
 ## Summary Statistics
-- **Total Properties Found:** 48
-- **Average Price:** $233,783.33
+- **Total Properties Found:** 46
+- **Average Price:** $231,382.61
 - **Price Range:** $150,000 - $300,000
 
 ## Recent Changes
 - **New Properties:** 0
-- **Removed Properties:** 0
+- **Removed Properties:** 2
 - **Price Changes:** 0
 
 ## Property Listings
@@ -388,19 +388,3 @@
 **Property Type:** SINGLE_FAMILY
 
 **URL:** www.zillow.com/homedetails/1021-W-Elmwood-Dr-Chattanooga-TN-37405/41413350_zpid/
-
-### 47. 527 Winterview Ln
-**Price:** $289,000
-**Bedrooms/Bathrooms:** 2/3
-**Square Feet:** 1,260
-**Property Type:** CONDO
-
-**URL:** www.zillow.com/homedetails/527-Winterview-Ln-Chattanooga-TN-37409/55240977_zpid/
-
-### 48. 1402 W 53rd St
-**Price:** $289,000
-**Bedrooms/Bathrooms:** 2/2
-**Square Feet:** 1,062
-**Property Type:** SINGLE_FAMILY
-
-**URL:** www.zillow.com/homedetails/1402-W-53rd-St-Chattanooga-TN-37409/55242029_zpid/

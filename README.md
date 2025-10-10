@@ -1,8 +1,8 @@
-# 🏠 Real Estate API Fetcher
+# Real Estate API Fetcher
 
 A Python application that fetches real estate property data from Zillow using RapidAPI and generates formatted reports.
 
-## 🚀 Features
+## Features
 
 - **Property Search**: Search properties by zip code with customizable filters
 - **RapidAPI Integration**: Uses Zillow API through RapidAPI
@@ -11,13 +11,13 @@ A Python application that fetches real estate property data from Zillow using Ra
 - **Change Tracking**: Detects new, removed, and price-changed properties
 - **Secure Configuration**: Keeps API keys local, code on GitHub
 
-## 📋 Requirements
+## Requirements
 
 - Python 3.7+
 - RapidAPI account with Zillow API access
 - Virtual environment (recommended)
 
-## 🛠️ Installation
+## Installation
 
 1. **Clone the repository**:
    ```bash
@@ -60,14 +60,14 @@ property_types: ["house"]
 sort_by: "newest"
 ```
 
-### 🔑 Getting Your RapidAPI Key
+### Getting Your RapidAPI Key
 
 1. Sign up at [RapidAPI](https://rapidapi.com/)
 2. Subscribe to the [Zillow API](https://rapidapi.com/s.mahmoud97/api/zillow-com1/)
 3. Copy your API key from the dashboard
 4. Add it to your local `config.yaml` file
 
-## 🏃‍♂️ Usage
+## Usage
 
 ### One-Time Run
 ```bash
@@ -84,7 +84,7 @@ python test_daily.py
 ./setup_cron.sh
 ```
 
-## 📊 Output Files
+## Output Files
 
 The application generates several output files in the `data/` directory:
 
@@ -93,7 +93,7 @@ The application generates several output files in the `data/` directory:
 - **`daily_runner.log`** - Execution logs
 - **`cron.log`** - Cron job logs (if using automation)
 
-## 📝 Sample Markdown Report
+## Sample Markdown Report
 
 ```markdown
 # Real Estate Property Report
@@ -113,7 +113,7 @@ The application generates several output files in the `data/` directory:
 **Zillow Link:** [View Property](https://www.zillow.com/...)
 ```
 
-## 🔄 Daily Automation
+## Daily Automation
 
 The daily runner provides:
 
@@ -136,13 +136,13 @@ This will:
 
 The default schedule runs daily at 9:00 AM.
 
-## 🔒 Security & Privacy
+## Security & Privacy
 
 - **API Keys**: Stored locally in `config.yaml` (not committed to GitHub)
 - **Data Files**: All property data stays on your local machine
 - **Template Config**: `config.yaml.template` provides a safe template for GitHub
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 real-estate-api-fetcher/
@@ -159,7 +159,7 @@ real-estate-api-fetcher/
 └── requirements.txt        # Python dependencies
 ```
 
-## 🛠️ Development
+## Development
 
 ### Adding New Features
 
@@ -175,7 +175,7 @@ real-estate-api-fetcher/
 - `property` - Get detailed property information by ZPID
 - `propertyByUrl` - Get property details from Zillow URL
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -191,15 +191,15 @@ Enable debug logging by modifying the logging level in the scripts:
 logging.basicConfig(level=logging.DEBUG)
 ```
 
-## 📄 License
+## License
 
 This project is open source and available under the [MIT License](LICENSE).
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📞 Support
+## Support
 
 If you encounter any issues or have questions:
 

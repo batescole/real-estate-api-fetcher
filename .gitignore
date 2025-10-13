@@ -5,8 +5,6 @@ env/
 
 # Data files (keep most local, but allow daily report)
 data/properties_*.csv
-data/daily_runner.log
-data/cron.log
 *.log
 
 # Keep the daily report for GitHub

@@ -2,19 +2,11 @@
 
 A Python application that fetches real estate property data from Bridge Interactive API and generates formatted reports.
 
-## Sample Output
-
-<kbd>
-   <img width="907" height="745" alt="Screenshot 2025-10-10 at 10 32 47 AM" src="https://github.com/user-attachments/assets/356dfcbe-7d33-473f-8bd4-2c2fb8f3d25f" />
-</kbd>
-   
 ## Features
 
 - **Property Search**: Search properties with customizable filters
 - **Bridge API Integration**: Uses Bridge Interactive MLS data API
 - **Multiple Output Formats**: CSV data files and formatted Markdown reports
-- **Daily Automation**: Automated daily fetching with cron job support
-- **Change Tracking**: Detects new, removed, and price-changed properties
 - **Secure Configuration**: Keeps API access tokens local, code on GitHub
 
 ## Requirements
@@ -44,33 +36,29 @@ A Python application that fetches real estate property data from Bridge Interact
 
 4. **Configure API access**:
    ```bash
-   cp config.yaml
-   # Edit config.yaml with your API key and search parameters
+   cp config.yaml.template config.yaml
+   # Edit config.yaml with your Bridge API access token and search parameters
    ```
+
+## Usage
+
+Run the fetcher from command line:
+```bash
+source venv/bin/activate
+python src/fetcher.py
+```
 
 ## Output Files
 
-The application generates several output files in the `data/` directory:
+The application generates files in the `data/` directory:
 
-- **`properties_YYYYMMDD_HHMMSS.csv`** - Raw property data
-- **`daily_properties_report.md`** - Formatted markdown report
-- **`daily_runner.log`** - Execution logs
-- **`cron.log`** - Cron job logs (if using automation)
-
-
-## Daily Automation
-
-The daily runner provides:
-
-- **Incremental Updates**: Updates existing reports instead of creating new ones
-- **Change Detection**: Tracks new, removed, and price-changed properties
-- **Historical Data**: Maintains CSV files with timestamps for comparison
-- **Error Handling**: Comprehensive logging and error recovery
-- **Cron Scheduling**: Automated scripts ran Daily @ 9AM
+- **`properties.csv`** - Raw property data
+- **`properties_report_YYYYMMDD_HHMMSS.md`** - Formatted markdown report with timestamp
+- **`daily_property_report.md`** - Latest property report for GitHub tracking
 
 ## Security & Privacy
 
-- **API Keys**: Stored locally in `config.yaml` (not committed to GitHub)
+- **API Access Token**: Stored locally in `config.yaml` (not committed to GitHub)
 - **Data Files**: All property data stays on your local machine
 
 ## Project Structure
@@ -84,15 +72,6 @@ real-estate-api-fetcher/
 ├── venv/                   # Virtual environment (local only)
 ├── config.yaml             # Your API configuration (local only)
 ├── config.yaml.template    # Template for GitHub
-├── daily_runner.py         # Daily automation script
-├── test_daily.py           # Test script
-├── setup_cron.sh           # Cron job setup script
+├── daily_property_report.md # Latest report (tracked in git)
 └── requirements.txt        # Python dependencies
 ```
-
-## Development
-### API Endpoints Used
-
-- `propertyExtendedSearch` - Search for properties by location and filters
-- `property` - Get detailed property information by ZPID
-- `propertyByUrl` - Get property details from Zillow URL

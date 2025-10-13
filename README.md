@@ -1,6 +1,6 @@
 # Real Estate API Fetcher
 
-A Python application that fetches real estate property data from Zillow using RapidAPI and generates formatted reports.
+A Python application that fetches real estate property data from Bridge Interactive API and generates formatted reports.
 
 ## Sample Output
 
@@ -10,17 +10,17 @@ A Python application that fetches real estate property data from Zillow using Ra
    
 ## Features
 
-- **Property Search**: Search properties by zip code with customizable filters
-- **RapidAPI Integration**: Uses Zillow API through RapidAPI
+- **Property Search**: Search properties with customizable filters
+- **Bridge API Integration**: Uses Bridge Interactive MLS data API
 - **Multiple Output Formats**: CSV data files and formatted Markdown reports
 - **Daily Automation**: Automated daily fetching with cron job support
 - **Change Tracking**: Detects new, removed, and price-changed properties
-- **Secure Configuration**: Keeps API keys local, code on GitHub
+- **Secure Configuration**: Keeps API access tokens local, code on GitHub
 
 ## Requirements
 
 - Python 3.7+
-- RapidAPI account with Zillow API access
+- Bridge Interactive API access token
 - Virtual environment (recommended)
 
 ## Installation

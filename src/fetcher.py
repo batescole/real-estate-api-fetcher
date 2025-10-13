@@ -10,88 +10,46 @@ from datetime import datetime
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-class ZillowRapidAPIClient:
-    """Client for RapidAPI Zillow API endpoints"""
+class BridgeAPIClient:
     
-    def __init__(self, api_key: str, host: str = "zillow-com1.p.rapidapi.com/propertyExtendedSearch"):
-        self.api_key = api_key
-        self.host = host
-        self.base_url = f"https://{host}"
-        self.headers = {
-            "X-RapidAPI-Key": api_key,
-            "X-RapidAPI-Host": host
-        }
+    def __init__(self, access_token: str, server_name: str = "test"):
+        #Initialize Bridge API client
+        self.access_token = access_token
+        self.server_name = server_name
+        self.base_url = "https://api.bridgedataoutput.com/api/v2"
     
     def _make_request(self, endpoint: str, params: Dict[str, Any] = None) -> Dict[str, Any]:
-        """Make a request to the RapidAPI Zillow endpoint"""
+        #Make authenticated request to the Bridge API
         url = f"{self.base_url}/{endpoint}"
         
+        # Add access token to params
+        if params is None:
+            params = {}
+        params["access_token"] = self.access_token
+        
         try:
-            response = requests.get(url, headers=self.headers, params=params)
+            response = requests.get(url, params=params)
             response.raise_for_status()
             return response.json()
         except requests.exceptions.RequestException as e:
             logger.error(f"API request failed: {e}")
+            logger.error(f"URL: {url}")
+            if 'response' in locals():
+                logger.error(f"Response: {response.text}")
             raise
     
-    def search_properties(self, 
-                         location: str,
-                         min_price: Optional[int] = None,
-                         max_price: Optional[int] = None,
-                         min_beds: Optional[int] = None,
-                         max_beds: Optional[int] = None,
-                         min_baths: Optional[int] = None,
-                         propertyType: Optional[str] = None,
-                         sort_by: Optional[str] = None,
-                         limit: int = 20) -> Dict[str, Any]:
-        """
-        Search for properties using RapidAPI Zillow endpoint
-        
-        Args:
-            location: City, state, or zip code to search
-            min_price: Minimum price filter
-            max_price: Maximum price filter
-            min_beds: Minimum bedrooms
-            max_beds: Maximum bedrooms
-            min_baths: Minimum bathrooms
-            propertyType: Type of property (house, condo, etc.)
-            sort_by: Sort results by (newest, price_asc, price_desc)
-            limit: Number of results to return
-        """
+    def get_listings(self, limit: int = 200, offset: int = 0) -> Dict[str, Any]:
+        #Retrieve property listings from Bridge API
         params = {
-            "location": location,
-            "limit": limit,
-            "sort": sort_by
+            "limit": min(limit, 200),  # API enforces max of 200
+            "offset": offset
         }
         
-        if min_price:
-            params["minPrice"] = min_price
-        if max_price:
-            params["maxPrice"] = max_price
-        if min_beds:
-            params["bedsMin"] = min_beds
-        if max_beds:
-            params["bedsMax"] = max_beds
-        if min_baths:
-            params["bathsMin"] = min_baths
-        if propertyType:
-            params["propertyType"] = propertyType
-        
-        return self._make_request("propertyExtendedSearch", params)
-    
-    def get_property_details(self, zpid: str) -> Dict[str, Any]:
-        """Get detailed information about a specific property by ZPID"""
-        params = {"zpid": zpid}
-        return self._make_request("property", params)
-    
-    
-    def get_property_by_url(self, property_url: str) -> Dict[str, Any]:
-        """Get property details by Zillow URL"""
-        params = {"url": property_url}
-        return self._make_request("propertyByUrl", params)
+        endpoint = f"{self.server_name}/listings"
+        return self._make_request(endpoint, params)
 
 def load_config(config_path: str = "config.yaml") -> Dict[str, Any]:
-    """Load configuration from YAML file"""
+    #Load configuration from YAML file
     try:
         with open(config_path, 'r') as file:
             config = yaml.safe_load(file)
@@ -103,73 +61,94 @@ def load_config(config_path: str = "config.yaml") -> Dict[str, Any]:
         logger.error(f"Error parsing YAML config: {e}")
         raise
 
-def search_properties_by_zip_codes(client: ZillowRapidAPIClient, 
-                                  zip_codes: List[str], 
-                                  search_params: Dict[str, Any]) -> pd.DataFrame:
-    """
-    Search for properties across multiple zip codes and return as DataFrame
+def search_properties_by_zip_codes(client: BridgeAPIClient, zip_codes: List[str], search_params: Dict[str, Any]) -> pd.DataFrame:                          
+    #Search for properties and apply filters from config
+    from utils import filter_properties
     
-    Args:
-        client: ZillowRapidAPIClient instance
-        zip_codes: List of zip codes to search
-        search_params: Search parameters from config
-    """
     all_listings = []
     
-    for zip_code in zip_codes:
-        logger.info(f"Searching properties in zip code: {zip_code}")
+    logger.info(f"Fetching properties from Bridge API")
+    logger.info(f"Filters from config: zips={zip_codes}, price={search_params.get('min_price')}-{search_params.get('max_price')}, beds>={search_params.get('min_beds')}, type={search_params.get('propertyType')}")
+    
+    try:
+        response = client.get_listings(limit=200)
         
-        try:
-            response = client.search_properties(
-                location=zip_code,
-                min_price=search_params.get("min_price"),
-                max_price=search_params.get("max_price"),
-                min_beds=search_params.get("min_beds"),
-                min_baths=search_params.get("min_baths"),
-                propertyType=search_params.get("propertyType"),
-                sort_by=search_params.get("sort_by", "newest")
-            )
+        if not response.get("success"):
+            logger.warning(f"API returned success=false")
+            return pd.DataFrame(all_listings)
             
-            # Process the response based on RapidAPI Zillow format
-            properties = response.get("props", []) or response.get("data", []) or response.get("results", [])
-            
-            for prop in properties:
-                # Build Zillow property URL if not provided
-                property_url = prop.get("detailUrl", "")
-                if not property_url and prop.get("zpid"):
-                    # Construct Zillow URL from address and zpid if detailUrl is missing
-                    address = prop.get("address", "").replace(" ", "-")
-                    city = prop.get("city", "").replace(" ", "-")
-                    state = prop.get("state", "")
-                    zpid = prop.get("zpid")
-                    if address and city and state and zpid:
-                        property_url = f"https://www.zillow.com/homedetails/{address}-{city}-{state}/{zpid}_zpid"
+        properties = response.get("bundle", [])
+        logger.info(f"Retrieved {len(properties)} properties from API")
+        
+        for prop in properties:
+                address = prop.get("UnparsedAddress", "")
                 
-                # Clean address to remove city, state, zip
-                raw_address = prop.get("address", "")
-                address_parts = raw_address.split(',')
-                clean_address = address_parts[0].strip() if address_parts else raw_address
+                if not address:
+                    street_number = prop.get("StreetNumber", "")
+                    street_name = prop.get("StreetName", "")
+                    street_suffix = prop.get("StreetSuffix", "")
+                    unit = prop.get("UnitNumber", "")
+                    
+                    address_parts = [street_number, street_name, street_suffix]
+                    address = " ".join([p for p in address_parts if p]).strip()
+                    if unit:
+                        address = f"{address} {unit}"
+                
+                if not address:
+                    address = f"Listing {prop.get('ListingKey', 'Unknown')}"
+                
+                city = prop.get("City", "")
+                state = prop.get("StateOrProvince", "")
+                postal_code = prop.get("PostalCode", "")
+                
+                property_url = prop.get("url", "")
+                
+                price = prop.get("ListPrice") or prop.get("OriginalListPrice", 0)
+                
+                beds = prop.get("BedroomsTotal", 0)
+                baths_full = prop.get("BathroomsFull", 0)
+                baths_half = prop.get("BathroomsHalf", 0)
+                total_baths = baths_full + (baths_half * 0.5)
+                
+                sqft = prop.get("LivingArea") or prop.get("AboveGradeFinishedArea", 0)
                 
                 listing = {
-                    "zpid": prop.get("zpid"),
-                    "address": clean_address,
-                    "price": prop.get("price", 0),
-                    "beds": prop.get("bedrooms", 0),
-                    "baths": prop.get("bathrooms", 0),
-                    "sqft": prop.get("livingArea", 0),
-                    "propertyType": prop.get("propertyType", "N/A"),
-                    "property_url": property_url
+                    "zpid": prop.get("ListingKey", ""),
+                    "address": address,
+                    "city": city,
+                    "state": state,
+                    "postal_code": postal_code,
+                    "price": price,
+                    "beds": beds,
+                    "baths": total_baths,
+                    "sqft": sqft,
+                    "propertySubType": prop.get("PropertySubType", "N/A"),
+                    "property_url": property_url,
+                    "status": prop.get("StandardStatus", "")
                 }
                 all_listings.append(listing)
-                
-        except Exception as e:
-            logger.error(f"Error searching zip code {zip_code}: {e}")
-            continue
+            
+    except Exception as e:
+        logger.error(f"Error fetching properties: {e}")
     
-    return pd.DataFrame(all_listings)
+    logger.info(f"Processed {len(all_listings)} total listings")
+    df = pd.DataFrame(all_listings)
+    
+    if not df.empty:
+        df = filter_properties(
+            df,
+            min_price=search_params.get("min_price"),
+            max_price=search_params.get("max_price"),
+            min_beds=search_params.get("min_beds"),
+            min_baths=search_params.get("min_baths"),
+            propertyType=search_params.get("propertyType")
+        )
+        logger.info(f"After applying config filters: {len(df)} properties")
+    
+    return df
 
 def save_to_markdown(df: pd.DataFrame, config: Dict[str, Any]) -> str:
-    """Save property data to a formatted markdown file"""
+   #Save property data to a formatted markdown file
     import os
     
     # Create data directory if it doesn't exist
@@ -180,15 +159,12 @@ def save_to_markdown(df: pd.DataFrame, config: Dict[str, Any]) -> str:
     filename = f"properties_report_{timestamp}.md"
     filepath = os.path.join("data", filename)
     
-    # Start building markdown content
     markdown_content = []
     
-    # Header
     markdown_content.append("# Real Estate Property Report")
     markdown_content.append(f"**Generated on:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     markdown_content.append("")
     
-    # Search criteria
     markdown_content.append("## Search Criteria")
     markdown_content.append(f"- **Zip Codes:** {', '.join(config.get('zip_codes', []))}")
     markdown_content.append(f"- **Price Range:** ${config.get('min_price', 'N/A'):,} - ${config.get('max_price', 'N/A'):,}")
@@ -198,7 +174,6 @@ def save_to_markdown(df: pd.DataFrame, config: Dict[str, Any]) -> str:
     markdown_content.append(f"- **Sort By:** {config.get('sort_by', 'N/A')}")
     markdown_content.append("")
     
-    # Summary statistics
     if not df.empty:
         markdown_content.append("## Summary Statistics")
         markdown_content.append(f"- **Total Properties Found:** {len(df)}")
@@ -224,13 +199,11 @@ def save_to_markdown(df: pd.DataFrame, config: Dict[str, Any]) -> str:
         
         markdown_content.append("")
     
-    # Property listings
     if not df.empty:
         markdown_content.append("## Property Listings")
         markdown_content.append("")
         
         for idx, row in df.iterrows():
-            # Property header
             address = row.get('address', 'N/A')
             city = row.get('city', 'N/A')
             state = row.get('state', 'N/A')
@@ -238,7 +211,6 @@ def save_to_markdown(df: pd.DataFrame, config: Dict[str, Any]) -> str:
             
             markdown_content.append(f"### {idx + 1}. {address}, {city}, {state}")
             
-            # Property details
             if price > 0:
                 markdown_content.append(f"**Price:** ${price:,}")
             
@@ -250,12 +222,7 @@ def save_to_markdown(df: pd.DataFrame, config: Dict[str, Any]) -> str:
             sqft = row.get('sqft', 0)
             if sqft > 0:
                 markdown_content.append(f"**Square Feet:** {sqft:,}")
-            
-            propertyType = row.get('propertyType', '')
-            if propertyType:
-                markdown_content.append(f"**Property Type:** {propertyType}")
         
-            # Zillow URL
             property_url = row.get('property_url', '')
             if property_url:
                 markdown_content.append(f"**Zillow Link:** [{property_url}]({property_url})")
@@ -265,27 +232,22 @@ def save_to_markdown(df: pd.DataFrame, config: Dict[str, Any]) -> str:
         markdown_content.append("## No Properties Found")
         markdown_content.append("No properties were found matching your search criteria.")
     
-    # Write to file
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write('\n'.join(markdown_content))
     
     return filepath
 
 def main():
-    """Main function to demonstrate the API usage"""
     try:
-        # Load configuration
         config = load_config()
         logger.info(f"Loaded configuration: {config}")
         
-        # Initialize client
-        client = ZillowRapidAPIClient(
-            api_key=config["api_key"],
-            host=config["host"]
+        client = BridgeAPIClient(
+            access_token=config["access_token"],
+            server_name=config.get("server_name", "test")
         )
-        logger.info(f"Initialized client for host: {config['host']}")
+        logger.info(f"Initialized Bridge API client (server: {config.get('server_name', 'test')})")
         
-        # Search parameters from config
         search_params = {
             "min_price": config.get("min_price"),
             "max_price": config.get("max_price"),
@@ -296,7 +258,6 @@ def main():
         }
         logger.info(f"Search parameters: {search_params}")
         
-        # Search properties
         df = search_properties_by_zip_codes(
             client=client,
             zip_codes=config["zip_codes"],
@@ -304,25 +265,12 @@ def main():
         )
         
         if not df.empty:
-            # Clean data and remove duplicates
-            from utils import clean_property_data, filter_properties
+            from utils import clean_property_data
             df = clean_property_data(df)
             logger.info(f"Found {len(df)} properties after cleaning")
-            
-            # Apply client-side filtering since API doesn't always respect filters
-            df = filter_properties(
-                df,
-                min_price=search_params.get("min_price"),
-                max_price=search_params.get("max_price"),
-                min_beds=search_params.get("min_beds"),
-                min_baths=search_params.get("min_baths"),
-                propertyType=search_params.get("propertyType")
-            )
-            logger.info(f"Found {len(df)} properties after filtering")
             print("\n=== PROPERTY SEARCH RESULTS ===")
             
-            # Display key columns with URLs
-            display_columns = ['address', 'price', 'beds', 'baths', 'sqft', 'property_url', 'propertyType']
+            display_columns = ['address', 'price', 'beds', 'baths', 'sqft', 'propertySubType', 'property_url']
             available_columns = [col for col in display_columns if col in df.columns]
             
             if available_columns:
@@ -330,24 +278,20 @@ def main():
             else:
                 print(df.head())
             
-            # Save to CSV
             import os
             os.makedirs("data", exist_ok=True)
             df.to_csv("data/properties.csv", index=False)
             logger.info("Properties saved to data/properties.csv")
             
-            # Save to Markdown
             markdown_file = save_to_markdown(df, config)
             logger.info(f"Markdown report saved to {markdown_file}")
             
-            # Display summary statistics
             print(f"\n=== SUMMARY ===")
             print(f"Total properties found: {len(df)}")
             if 'price' in df.columns:
                 print(f"Average price: ${df['price'].mean():,.2f}")
                 print(f"Price range: ${df['price'].min():,.0f} - ${df['price'].max():,.0f}")
             
-            # Show sample URLs
             if 'property_url' in df.columns:
                 print(f"\n=== SAMPLE PROPERTY URLs ===")
                 sample_urls = df['property_url'].head(3).tolist()

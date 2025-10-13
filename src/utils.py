@@ -163,10 +163,9 @@ def filter_properties(df: pd.DataFrame,
         df = df[df['sqft'] <= max_sqft]
     
     if propertyType is not None:
-        # Filter by property type (case-insensitive comparison)
-        if 'propertyType' in df.columns:
+        if 'propertySubType' in df.columns:
             pre_filter_count = len(df)
-            df = df[df['propertyType'].str.upper() == propertyType.upper()]
+            df = df[df['propertySubType'].str.contains(propertyType, case=False, na=False)]
             filtered_count = pre_filter_count - len(df)
             if filtered_count > 0:
                 logger.info(f"Filtered out {filtered_count} properties not matching propertyType: {propertyType}")
@@ -174,44 +173,6 @@ def filter_properties(df: pd.DataFrame,
     logger.info(f"Filtered data: {len(df)} properties remaining (from {original_count})")
     return df
 
-def get_property_statistics(df: pd.DataFrame) -> Dict[str, Any]:
-    """Generate statistics from property data"""
-    if df.empty:
-        return {}
-    
-    stats = {
-        'total_properties': len(df),
-        'average_price': df['price'].mean(),
-        'median_price': df['price'].median(),
-        'min_price': df['price'].min(),
-        'max_price': df['price'].max(),
-        'average_beds': df['beds'].mean(),
-        'average_baths': df['baths'].mean(),
-        'average_sqft': df['sqft'].mean(),
-        'price_per_sqft_avg': df['price_per_sqft'].mean(),
-        'cities': df['city'].value_counts().head(10).to_dict(),
-        'propertyType': df['propertyType'].value_counts().to_dict()
-    }
-    
-    return stats
-
-def extract_zpid_from_url(url: str) -> Optional[str]:
-    """Extract ZPID from Zillow property URL"""
-    try:
-        # Zillow URLs typically contain zpid in the format /zpid/
-        if '/zpid/' in url:
-            parts = url.split('/zpid/')
-            if len(parts) > 1:
-                zpid_part = parts[1].split('/')[0].split('_')[0]
-                return zpid_part
-        return None
-    except Exception as e:
-        logger.error(f"Error extracting ZPID from URL {url}: {e}")
-        return None
-
-def url_encode_property_url(url: str) -> str:
-    """URL encode a property URL for API requests"""
-    return urllib.parse.quote(url, safe='')
 
 def save_to_csv(df: pd.DataFrame, filename: str, include_timestamp: bool = True) -> str:
     """Save DataFrame to CSV with optional timestamp"""

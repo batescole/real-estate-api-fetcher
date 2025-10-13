@@ -8,7 +8,7 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
 
-from fetcher import ZillowRapidAPIClient, load_config, search_properties_by_zip_codes
+from fetcher import BridgeAPIClient, load_config, search_properties_by_zip_codes
 from utils import compare_property_lists, load_from_csv, save_to_csv, clean_property_data, validate_no_duplicates, filter_properties
 import logging
 from datetime import datetime, timedelta
@@ -233,10 +233,11 @@ def run_daily_fetch():
         logger.info(f"Loaded configuration for zip codes: {config['zip_codes']}")
         
         # Initialize client
-        client = ZillowRapidAPIClient(
-            api_key=config["api_key"],
-            host=config["host"]
+        client = BridgeAPIClient(
+            access_token=config["access_token"],
+            server_name=config.get("server_name", "test")
         )
+        logger.info(f"Initialized Bridge API client (server: {config.get('server_name', 'test')})")
         
         # Search parameters from config
         search_params = {
